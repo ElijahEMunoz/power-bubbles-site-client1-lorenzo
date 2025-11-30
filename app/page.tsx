@@ -1,4 +1,6 @@
 // app/page.tsx
+import Image from "next/image";
+
 export default function Home() {
   return (
     <main className="min-h-screen">
@@ -56,8 +58,14 @@ export default function Home() {
           <div className="mt-8 grid gap-6 md:grid-cols-3">
             {/* House Washing */}
             <div className="rounded-xl border border-slate-200 bg-slate-50 p-6 text-center shadow-sm transition hover:-translate-y-1 hover:border-[#1E80C9]/40 hover:shadow-lg">
-              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[#1E80C9]/10 text-2xl">
-                <span className="text-[#1E80C9]">🏠</span>
+              <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#E4F2FF] shadow-sm">
+                <Image
+                  src="/House Wash.png"
+                  alt="House Washing icon"
+                  width={48}
+                  height={48}
+                  className="h-12 w-12 object-contain"
+                />
               </div>
               <h3 className="text-base font-semibold text-[#0B2C4A]">
                 House Washing
@@ -70,8 +78,14 @@ export default function Home() {
 
             {/* Driveway Cleaning */}
             <div className="rounded-xl border border-slate-200 bg-slate-50 p-6 text-center shadow-sm transition hover:-translate-y-1 hover:border-[#1E80C9]/40 hover:shadow-lg">
-              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[#1E80C9]/10 text-2xl">
-                <span className="text-[#1E80C9]">🚗</span>
+              <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#E4F2FF] shadow-sm">
+                <Image
+                  src="/DriveWay.png"
+                  alt="Driveway Cleaning icon"
+                  width={48}
+                  height={48}
+                  className="h-12 w-12 object-contain"
+                />
               </div>
               <h3 className="text-base font-semibold text-[#0B2C4A]">
                 Driveway Cleaning
@@ -84,8 +98,14 @@ export default function Home() {
 
             {/* Commercial Cleaning */}
             <div className="rounded-xl border border-slate-200 bg-slate-50 p-6 text-center shadow-sm transition hover:-translate-y-1 hover:border-[#1E80C9]/40 hover:shadow-lg">
-              <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[#1E80C9]/10 text-2xl">
-                <span className="text-[#1E80C9]">🏢</span>
+              <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#E4F2FF] shadow-sm">
+                <Image
+                  src="/Commerical.png"
+                  alt="Commercial Cleaning icon"
+                  width={48}
+                  height={48}
+                  className="h-12 w-12 object-contain"
+                />
               </div>
               <h3 className="text-base font-semibold text-[#0B2C4A]">
                 Commercial Cleaning
@@ -255,7 +275,7 @@ export default function Home() {
       <footer className="bg-[#0E4A78] py-6 text-xs text-blue-100">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 text-center md:flex-row md:text-left">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-white/10 text-white text-xs font-bold">
+            <div className="flex h-8 w-8 items-center justify-center rounded-md bg:white/10 text-white text-xs font-bold">
               PB
             </div>
             <span className="font-semibold text-white">
