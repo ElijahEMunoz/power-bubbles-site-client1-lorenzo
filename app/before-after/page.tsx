@@ -24,7 +24,28 @@ const beforeAfterItems = [
     description:
       "Dull entry walkway refreshed for better curb appeal.",
   },
-  // Add more combined before/after images here later
+];
+
+// temporary example videos – swap embedUrl with your real YouTube links
+const videoItems = [
+  {
+    id: 1,
+    title: "Driveway Cleaning Time-Lapse",
+    description: "Watch years of dirt disappear in just seconds.",
+    embedUrl: "https://www.youtube.com/embed/tfby9Lup0eQ",
+  },
+  {
+    id: 2,
+    title: "Patio Power Wash Demo",
+    description: "See how a deep clean restores this backyard patio.",
+    embedUrl: "https://www.youtube.com/embed/pAQ9bAoUkZg?si=Ih4QKXNx3Cgtee3u",
+  },
+  {
+    id: 3,
+    title: "Front Walkway Refresh",
+    description: "Side-by-side look at the before and after results.",
+    embedUrl: "https://www.youtube.com/embed/YoxmCnLN3yk?si=AnJAN7pzPPyu0NIJ",
+  },
 ];
 
 export default function BeforeAfterPage() {
@@ -51,7 +72,7 @@ export default function BeforeAfterPage() {
           {beforeAfterItems.map((item) => (
             <article
               key={item.id}
-              className="overflow-hidden rounded-xl bg-[#0E4A78] shadow-md transition hover:-translate-y-1 hover:shadow-lg"
+              className="overflow-hidden rounded-xl bg-[#0E4A78] shadow-md border border-[#0E4A78]"
             >
               {/* Single combined image */}
               <div className="relative h-40 md:h-48 lg:h-56">
@@ -74,10 +95,8 @@ export default function BeforeAfterPage() {
               </div>
 
               {/* Text under card */}
-              <div className="px-4 py-3 border-t border-[#0E4A78] bg-[#0E4A78]">
-                <h2 className="text-sm font-semibold text-white">
-                  {item.label}
-                </h2>
+              <div className="px-4 py-3 border-t border-white/10 text-white">
+                <h2 className="text-sm font-semibold">{item.label}</h2>
                 <p className="mt-1 text-xs text-blue-100">
                   {item.description}
                 </p>
@@ -86,7 +105,45 @@ export default function BeforeAfterPage() {
           ))}
         </section>
 
-        {/* CTA STRIP WITH QR PLACEHOLDER */}
+        {/* VIDEO SECTION */}
+        <section className="mb-14 rounded-2xl bg-white shadow-sm border border-slate-200 px-6 py-6 md:px-8 md:py-8">
+          <div className="mb-6">
+            <h2 className="text-2xl md:text-3xl font-semibold text-[#0B2C4A]">
+              Watch the Clean in Action
+            </h2>
+            <p className="mt-2 text-sm md:text-base text-[#355070] max-w-2xl">
+              Short clips from recent Power Bubbles jobs so your customers can
+              see the process and results in real time.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {videoItems.map((video) => (
+              <article
+                key={video.id}
+                className="rounded-xl border border-slate-200 bg-slate-50 p-3 shadow-sm"
+              >
+                <div className="aspect-video w-full overflow-hidden rounded-lg bg-black">
+                  <iframe
+                    src={video.embedUrl}
+                    title={video.title}
+                    className="h-full w-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                </div>
+                <h3 className="mt-3 text-sm font-semibold text-[#0B2C4A]">
+                  {video.title}
+                </h3>
+                <p className="mt-1 text-xs text-[#4A6484]">
+                  {video.description}
+                </p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* CTA STRIP WITH QR CODE */}
         <section className="mt-4 rounded-2xl bg-[#0E4A78] text-white px-8 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="max-w-xl">
             <h2 className="text-2xl font-semibold mb-2">
@@ -104,9 +161,14 @@ export default function BeforeAfterPage() {
             </Link>
           </div>
 
-          {/* QR code placeholder */}
-          <div className="w-40 h-40 md:w-44 md:h-44 rounded-xl bg-white flex items-center justify-center shadow-md text-xs font-semibold text-slate-500">
-            QR CODE
+          {/* QR code image */}
+          <div className="relative w-40 h-40 md:w-44 md:h-44 rounded-xl bg-white flex items-center justify-center shadow-md">
+            <Image
+              src="/QR Code Sample.png" // put this file in your /public folder
+              alt="Scan to view more Power Bubbles results"
+              fill
+              className="object-contain p-4"
+            />
           </div>
         </section>
       </div>
