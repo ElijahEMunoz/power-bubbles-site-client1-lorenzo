@@ -1,44 +1,54 @@
 // app/page.tsx
 import Image from "next/image";
-
+import Link from "next/link"; // <-- 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      {/* HERO SECTION */}
-      <section className="bg-[#0E4A78] text-white">
-        <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-[1.2fr,1fr] md:items-center md:py-20">
-          {/* Left: text */}
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#4FC6E0]">
-              Clean • Bright • Restored
-            </p>
-            <h1 className="mt-3 text-4xl font-bold leading-tight md:text-5xl">
-              Professional
-              <br />
-              Pressure Washing
-            </h1>
-            <p className="mt-4 max-w-md text-sm text-slate-100">
-              Residential and commercial pressure washing for driveways, siding,
-              patios, and more. Fully licensed, insured, and customer-focused.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a
-                href="#contact"
-                className="rounded-md bg-[#1E80C9] px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-[#4BB3FD]"
-              >
-                Get a Free Quote
-              </a>
-              <a
-                href="#gallery"
-                className="text-sm font-semibold text-slate-100 underline-offset-4 transition hover:text-white hover:underline"
-              >
-                View Before &amp; After
-              </a>
-            </div>
-          </div>
+      {/* HERO SECTION – IMAGE BACKGROUND */}
+      <section className="relative min-h-[70vh] overflow-hidden text-white">
+        {/* Background image */}
+        <Image
+          src="/wash1.png"
+          alt="Pressure washing a driveway"
+          fill
+          priority
+          className="object-cover -z-20"
+        />
 
-          {/* Right: hero image placeholder */}
-          <div className="h-52 rounded-xl bg-gradient-to-tr from-slate-800 via-slate-600 to-slate-400 shadow-xl md:h-64" />
+        {/* Dark blue overlay */}
+        <div className="absolute inset-0 bg-[#0E4A78]/80 -z-10" />
+
+        {/* Hero content */}
+        <div className="relative mx-auto max-w-6xl px-4 py-20 md:py-28">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#4FC6E0]">
+            Clean • Bright • Restored
+          </p>
+
+          <h1 className="mt-4 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
+            Professional
+            <br />
+            Pressure Washing
+          </h1>
+
+          <p className="mt-4 max-w-xl text-sm md:text-base text-slate-100">
+            Residential and commercial pressure washing for driveways, siding,
+            patios, and more. Fully licensed, insured, and customer-focused.
+          </p>
+
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a
+              href="#contact"
+              className="rounded-md bg-[#1E80C9] px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-[#4BB3FD]"
+            >
+              Get a Free Quote
+            </a>
+            <a
+              href="#gallery"
+              className="text-sm font-semibold text-slate-100 underline-offset-4 transition hover:text-white hover:underline"
+            >
+              View Before &amp; After
+            </a>
+          </div>
         </div>
       </section>
 
@@ -132,31 +142,76 @@ export default function Home() {
             Real Power Bubbles results from local driveways and homes.
           </p>
 
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="overflow-hidden rounded-lg bg-slate-200 shadow-sm"
-              >
-                <div className="h-24 bg-slate-500" />
-                <div className="flex text-xs font-semibold">
-                  <span className="flex-1 bg-black/70 px-3 py-1 text-center">
-                    BEFORE
-                  </span>
-                  <span className="flex-1 bg-emerald-600/80 px-3 py-1 text-center">
-                    AFTER
-                  </span>
-                </div>
+          {/* Combined before/after images as single cards */}
+          <div className="mt-6 grid gap-6 md:grid-cols-3">
+            {/* Driveway Cleaning */}
+            <div className="overflow-hidden rounded-lg bg-[#0F5FB5] shadow-lg">
+              <div className="relative h-44 md:h-56">
+                <Image
+                  src="/Before%200.jpg"
+                  alt="Driveway cleaning before and after"
+                  fill
+                  className="object-cover"
+                />
+                <span className="absolute left-3 top-3 rounded-full bg-black/80 px-3 py-1 text-[10px] font-semibold">
+                  BEFORE
+                </span>
+                <span className="absolute right-3 top-3 rounded-full bg-emerald-600 px-3 py-1 text-[10px] font-semibold">
+                  AFTER
+                </span>
               </div>
-            ))}
+              <div className="px-4 py-3 text-sm font-semibold">
+                Driveway Cleaning
+              </div>
+            </div>
+
+            {/* Patio Wash */}
+            <div className="overflow-hidden rounded-lg bg-[#0F5FB5] shadow-lg">
+              <div className="relative h-44 md:h-56">
+                <Image
+                  src="/Before%202.jpg"
+                  alt="Patio wash before and after"
+                  fill
+                  className="object-cover"
+                />
+                <span className="absolute left-3 top-3 rounded-full bg-black/80 px-3 py-1 text-[10px] font-semibold">
+                  BEFORE
+                </span>
+                <span className="absolute right-3 top-3 rounded-full bg-emerald-600 px-3 py-1 text-[10px] font-semibold">
+                  AFTER
+                </span>
+              </div>
+              <div className="px-4 py-3 text-sm font-semibold">Patio Wash</div>
+            </div>
+
+            {/* Front Walkway */}
+            <div className="overflow-hidden rounded-lg bg-[#0F5FB5] shadow-lg">
+              <div className="relative h-44 md:h-56">
+                <Image
+                  src="/Before%203.jpg"
+                  alt="Front walkway before and after"
+                  fill
+                  className="object-cover"
+                />
+                <span className="absolute left-3 top-3 rounded-full bg-black/80 px-3 py-1 text-[10px] font-semibold">
+                  BEFORE
+                </span>
+                <span className="absolute right-3 top-3 rounded-full bg-emerald-600 px-3 py-1 text-[10px] font-semibold">
+                  AFTER
+                </span>
+              </div>
+              <div className="px-4 py-3 text-sm font-semibold">
+                Front Walkway
+              </div>
+            </div>
           </div>
 
-          <a
-            href="#contact"
+          <Link
+            href="/before-after"
             className="mt-6 inline-flex items-center text-sm font-semibold text-white underline-offset-4 transition hover:text-blue-50 hover:underline"
           >
             See more results &amp; book your wash →
-          </a>
+          </Link>
         </div>
       </section>
 
@@ -275,7 +330,7 @@ export default function Home() {
       <footer className="bg-[#0E4A78] py-6 text-xs text-blue-100">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 text-center md:flex-row md:text-left">
           <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-md bg:white/10 text-white text-xs font-bold">
+            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-white/10 text-white text-xs font-bold">
               PB
             </div>
             <span className="font-semibold text-white">

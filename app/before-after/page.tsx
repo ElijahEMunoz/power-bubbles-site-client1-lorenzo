@@ -1,114 +1,115 @@
 // app/before-after/page.tsx
+import Image from "next/image";
+import Link from "next/link";
+
+const beforeAfterItems = [
+  {
+    id: 1,
+    src: "/Before%200.jpg",
+    label: "Driveway Cleaning",
+    description:
+      "Heavily stained brick driveway restored to a clean, bright finish.",
+  },
+  {
+    id: 2,
+    src: "/Before%202.jpg",
+    label: "Patio Wash",
+    description:
+      "Weathered concrete patio brought back to life with a deep clean.",
+  },
+  {
+    id: 3,
+    src: "/Before%203.jpg",
+    label: "Front Walkway",
+    description:
+      "Dull entry walkway refreshed for better curb appeal.",
+  },
+  // Add more combined before/after images here later
+];
 
 export default function BeforeAfterPage() {
   return (
-    <section className="bg-[#F5F8FC]">
-      <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
-        {/* Title */}
-        <div className="mb-8 text-center md:text-left">
-          <h1 className="text-3xl md:text-4xl font-bold text-slate-900">
+    <main className="min-h-screen bg-[#F5F8FC] py-12 md:py-16">
+      <div className="mx-auto max-w-6xl px-4 md:px-8">
+        {/* HEADER */}
+        <header className="mb-10">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#4FC6E0]">
+            Real Results
+          </p>
+          <h1 className="mt-2 text-3xl md:text-4xl font-bold text-[#0B2C4A]">
             Before &amp; After Gallery
           </h1>
-          <p className="mt-2 text-sm md:text-base text-slate-600">
-            See real Power Bubbles results from driveways, patios, and siding.
+          <p className="mt-3 max-w-2xl text-sm md:text-base text-[#355070]">
+            See real Power Bubbles results from driveways, patios, walkways, and
+            siding. Every project shows the difference professional pressure
+            washing can make.
           </p>
-        </div>
+        </header>
 
-        {/* BEFORE / AFTER IMAGE GRID */}
-        <div className="grid gap-4 md:grid-cols-4 mb-10">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <div
-              key={i}
-              className="overflow-hidden rounded-lg bg-slate-200 shadow-sm"
+        {/* GALLERY GRID */}
+        <section className="grid gap-6 md:grid-cols-2 xl:grid-cols-3 mb-14">
+          {beforeAfterItems.map((item) => (
+            <article
+              key={item.id}
+              className="overflow-hidden rounded-xl bg-[#0E4A78] shadow-md transition hover:-translate-y-1 hover:shadow-lg"
             >
-              <div className="h-24 bg-slate-400" />
-              <div className="flex text-[11px] font-semibold text-white">
-                <span className="flex-1 bg-black/70 px-2 py-1 text-center">
+              {/* Single combined image */}
+              <div className="relative h-40 md:h-48 lg:h-56">
+                <Image
+                  src={item.src}
+                  alt={item.label}
+                  fill
+                  className="object-cover"
+                />
+
+                {/* BEFORE label (left) */}
+                <span className="absolute left-3 top-3 rounded bg-black/80 px-3 py-1 text-[11px] font-semibold text-white">
                   BEFORE
                 </span>
-                <span className="flex-1 bg-emerald-600/80 px-2 py-1 text-center">
+
+                {/* AFTER label (right) */}
+                <span className="absolute right-3 top-3 rounded bg-emerald-600 px-3 py-1 text-[11px] font-semibold text-white">
                   AFTER
                 </span>
               </div>
-            </div>
-          ))}
-        </div>
 
-        {/* SEE THE DIFFERENCE STRIP + QR PLACEHOLDER */}
-        <div className="mb-12 rounded-xl bg-[#1E80C9] px-6 py-6 text-white shadow-sm md:flex md:items-center md:justify-between">
-          <div className="mb-4 md:mb-0">
-            <h2 className="text-xl md:text-2xl font-semibold">
-              See the Difference
+              {/* Text under card */}
+              <div className="px-4 py-3 border-t border-[#0E4A78] bg-[#0E4A78]">
+                <h2 className="text-sm font-semibold text-white">
+                  {item.label}
+                </h2>
+                <p className="mt-1 text-xs text-blue-100">
+                  {item.description}
+                </p>
+              </div>
+            </article>
+          ))}
+        </section>
+
+        {/* CTA STRIP WITH QR PLACEHOLDER */}
+        <section className="mt-4 rounded-2xl bg-[#0E4A78] text-white px-8 py-8 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="max-w-xl">
+            <h2 className="text-2xl font-semibold mb-2">
+              See the Difference Up Close
             </h2>
-            <p className="mt-1 text-sm text-blue-100 max-w-md">
-              Scan the code to view more photos and videos on your phone.
+            <p className="text-sm text-blue-100 mb-4">
+              Scan the code or send us a message to see more photos and videos
+              of recent jobs, plus quick estimates for your property.
             </p>
-          </div>
-          <div className="flex justify-center md:justify-end">
-            <div className="h-24 w-24 rounded-lg bg-white/90 shadow-inner flex items-center justify-center text-xs font-semibold text-slate-700">
-              QR CODE
-            </div>
-          </div>
-        </div>
-
-        {/* VIDEO DEMO SECTION */}
-        <div className="mb-4">
-          <h2 className="text-2xl font-semibold md:text-3xl">
-            Watch Our Work in Action
-          </h2>
-          <p className="mt-2 text-sm text-slate-600">
-            Real Power Bubbles results from start to finish.
-          </p>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-3">
-          {[
-            {
-              title: "Driveway Restoration",
-              subtitle: "1:32 min • Residential",
-            },
-            {
-              title: "House Siding Cleanup",
-              subtitle: "0:58 min • Residential",
-            },
-            {
-              title: "Patio & Walkway Wash",
-              subtitle: "1:47 min • Commercial",
-            },
-          ].map((video) => (
-            <div
-              key={video.title}
-              className="overflow-hidden rounded-xl bg-white shadow-sm border border-slate-200"
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-lg bg-[#4BB3FD] px-8 py-4 text-base font-semibold text-white shadow-lg hover:bg-[#1E80C9] hover:-translate-y-0.5 transition"
             >
-              <div className="relative h-32 bg-slate-400">
-                {/* Play button placeholder */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="h-10 w-10 rounded-full bg-black/70 flex items-center justify-center">
-                    <span className="ml-1 text-white text-sm">▶</span>
-                  </div>
-                </div>
-              </div>
-              <div className="p-3">
-                <div className="text-sm font-semibold text-slate-900">
-                  {video.title}
-                </div>
-                <div className="mt-1 text-[11px] text-slate-600">
-                  {video.subtitle}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+              Get a Free Quote
+            </Link>
+          </div>
 
-        <div className="mt-6 flex justify-center">
-          <a
-            href="/contact"
-            className="rounded-md bg-[#1E80C9] px-5 py-2 text-sm font-semibold text-white shadow hover:bg-[#0E4A78]"
-          >
-            Get a Free Quote
-          </a>
-        </div>
+          {/* QR code placeholder */}
+          <div className="w-40 h-40 md:w-44 md:h-44 rounded-xl bg-white flex items-center justify-center shadow-md text-xs font-semibold text-slate-500">
+            QR CODE
+          </div>
+        </section>
       </div>
-    </section>
+    </main>
   );
 }
