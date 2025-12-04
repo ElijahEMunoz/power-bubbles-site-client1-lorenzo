@@ -1,231 +1,309 @@
-// app/contact/page.tsx
-import Link from "next/link";
+"use client";
+
+import { useState } from "react";
+
+type FormState = {
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  service: string;
+  date: string;
+  time: string;
+  details: string;
+};
 
 export default function ContactPage() {
+  const [form, setForm] = useState<FormState>({
+    name: "",
+    email: "",
+    phone: "",
+    address: "",
+    service: "",
+    date: "",
+    time: "",
+    details: "",
+  });
+
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
+    "idle"
+  );
+  const [statusMessage, setStatusMessage] = useState("");
+
+  function handleChange(
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  }
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("loading");
+    setStatusMessage("");
+
+    try {
+      const res = await fetch("/api/book", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          address: form.address,
+          service: form.service,
+          date: form.date,
+          time: form.time,
+          details: form.details,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        throw new Error("Request failed");
+      }
+
+      setStatus("success");
+      setStatusMessage(
+        "Thanks! Your request was sent. We’ll reach out with pricing and availability."
+      );
+
+      // Clear the form after success
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+        address: "",
+        service: "",
+        date: "",
+        time: "",
+        details: "",
+      });
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+      setStatusMessage(
+        "Something went wrong sending your request. Please try again in a moment."
+      );
+    }
+  }
+
   return (
     <main className="min-h-screen bg-[#F5F8FC] py-12 md:py-16">
       <div className="mx-auto max-w-6xl px-4 md:px-8">
-        {/* Page heading */}
-        <header className="mb-10">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#4FC6E0]">
-            Get a Free Quote
-          </p>
-          <h1 className="mt-2 text-3xl md:text-4xl font-bold text-[#0B2C4A]">
-            Contact Power Bubbles
-          </h1>
-          <p className="mt-3 max-w-2xl text-sm md:text-base text-[#355070]">
-            Tell us a little about your property and the services you need. We’ll
-            follow up with pricing, scheduling options, and answers to any
-            questions you have.
-          </p>
-        </header>
-
-        <div className="grid gap-10 md:grid-cols-[1.1fr,1fr] items-start">
-          {/* LEFT: Info / selling points */}
+        <div className="grid gap-10 md:grid-cols-[1.1fr,1.4fr] md:items-start">
+          {/* LEFT: Why choose Power Bubbles (same idea as before) */}
           <section>
-            <div className="rounded-xl bg-white p-6 shadow-sm border border-slate-200">
-              <h2 className="text-lg font-semibold text-[#0B2C4A]">
-                Why Book with Power Bubbles?
-              </h2>
-              <ul className="mt-4 space-y-3 text-sm text-[#355070]">
-                <li className="flex gap-3">
-                  <span className="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500 text-[11px] text-white">
-                    ✓
-                  </span>
-                  <span>
-                    <span className="font-semibold text-[#0B2C4A]">
-                      Fast, Free Quotes
-                    </span>
-                    <br />
-                    Most jobs can be quoted from your description and photos —
-                    no obligation.
-                  </span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500 text-[11px] text-white">
-                    ✓
-                  </span>
-                  <span>
-                    <span className="font-semibold text-[#0B2C4A]">
-                      Licensed &amp; Insured
-                    </span>
-                    <br />
-                    Your home or business is fully protected on every job.
-                  </span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500 text-[11px] text-white">
-                    ✓
-                  </span>
-                  <span>
-                    <span className="font-semibold text-[#0B2C4A]">
-                      Local &amp; Customer-Focused
-                    </span>
-                    <br />
-                    Friendly service, clear communication, and results you can
-                    see immediately.
-                  </span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Contact details card */}
-            <div className="mt-6 rounded-xl bg-white p-6 shadow-sm border border-slate-200 text-sm text-[#355070] space-y-3">
-              <h3 className="text-sm font-semibold text-[#0B2C4A]">
-                Prefer to reach out directly?
-              </h3>
-              <p>
-                <span className="font-semibold text-[#0B2C4A]">Phone: </span>
-                (555) 123-4567
-              </p>
-              <p>
-                <span className="font-semibold text-[#0B2C4A]">Email: </span>
-                info@powerbubbles.com
-              </p>
-              <p>
-                <span className="font-semibold text-[#0B2C4A]">
-                  Service Area:{" "}
-                </span>
-                Your City &amp; surrounding neighborhoods.
-              </p>
-              <p className="text-xs text-slate-500">
-                * You can customize this with the real phone, email, and service
-                area once your client confirms them.
-              </p>
-            </div>
-          </section>
-
-          {/* RIGHT: Contact form (HTML only for now) */}
-          <section className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h2 className="text-lg font-semibold text-[#0B2C4A]">
-              Book a Pressure Wash Today
-            </h2>
-            <p className="mt-1 text-xs text-[#4A6484]">
-              Fill out the form and we’ll follow up with pricing and availability.
+            <h1 className="text-3xl md:text-4xl font-bold text-[#0B2C4A] mb-4">
+              Why Choose Power Bubbles?
+            </h1>
+            <p className="text-sm md:text-base text-[#355070] mb-6 max-w-md">
+              Licensed, insured, and focused on giving your property a fresh,
+              clean look with professional pressure washing.
             </p>
 
-            <form className="mt-4 space-y-3">
+            <ul className="space-y-5 text-sm text-[#0B2C4A]">
+              <li className="flex items-start gap-3">
+                <span className="mt-1 inline-flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500 text-white text-xs">
+                  ✓
+                </span>
+                <div>
+                  <p className="font-semibold">Licensed &amp; Insured</p>
+                  <p className="text-[#4A6484]">
+                    You’re fully covered on every job, big or small.
+                  </p>
+                </div>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-1 inline-flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500 text-white text-xs">
+                  ✓
+                </span>
+                <div>
+                  <p className="font-semibold">Eco-Friendly &amp; Streak-Free</p>
+                  <p className="text-[#4A6484]">
+                    Professional equipment and cleaning solutions for a safe,
+                    spotless finish.
+                  </p>
+                </div>
+              </li>
+              <li className="flex items-start gap-3">
+                <span className="mt-1 inline-flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500 text-white text-xs">
+                  ✓
+                </span>
+                <div>
+                  <p className="font-semibold">Fast Response Time</p>
+                  <p className="text-[#4A6484]">
+                    Get a quote quickly and schedule at a time that works for
+                    you.
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </section>
+
+          {/* RIGHT: Booking form */}
+          <section className="rounded-2xl bg-white shadow-sm border border-slate-200 px-6 py-6 md:px-8 md:py-8">
+            <h2 className="text-2xl md:text-3xl font-semibold text-[#0B2C4A] mb-2">
+              Book a Pressure Wash Today
+            </h2>
+            <p className="text-sm text-[#4A6484] mb-6">
+              Fill out the form and we’ll follow up with pricing and
+              availability.
+            </p>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Name */}
               <div>
-                <label className="block text-xs font-medium text-[#355070]">
+                <label className="block text-sm font-medium text-[#0B2C4A]">
                   Name
                 </label>
                 <input
                   type="text"
-                  className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-[#0B2C4A] outline-none transition focus:border-[#1E80C9] focus:ring-2 focus:ring-[#1E80C9]/30"
+                  name="name"
+                  value={form.name}
+                  onChange={handleChange}
+                  required
+                  className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-[#1E80C9] focus:outline-none focus:ring-1 focus:ring-[#1E80C9]"
                   placeholder="Your full name"
                 />
               </div>
 
-              <div className="grid gap-3 md:grid-cols-2">
+              {/* Phone + Email */}
+              <div className="grid gap-4 md:grid-cols-2">
                 <div>
-                  <label className="block text-xs font-medium text-[#355070]">
+                  <label className="block text-sm font-medium text-[#0B2C4A]">
                     Phone
                   </label>
                   <input
                     type="tel"
-                    className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-[#0B2C4A] outline-none transition focus:border-[#1E80C9] focus:ring-2 focus:ring-[#1E80C9]/30"
+                    name="phone"
+                    value={form.phone}
+                    onChange={handleChange}
+                    required
+                    className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-[#1E80C9] focus:outline-none focus:ring-1 focus:ring-[#1E80C9]"
                     placeholder="(555) 123-4567"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-[#355070]">
+                  <label className="block text-sm font-medium text-[#0B2C4A]">
                     Email
                   </label>
                   <input
                     type="email"
-                    className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-[#0B2C4A] outline-none transition focus:border-[#1E80C9] focus:ring-2 focus:ring-[#1E80C9]/30"
+                    name="email"
+                    value={form.email}
+                    onChange={handleChange}
+                    required
+                    className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-[#1E80C9] focus:outline-none focus:ring-1 focus:ring-[#1E80C9]"
                     placeholder="you@example.com"
                   />
                 </div>
               </div>
 
+              {/* Address */}
               <div>
-                <label className="block text-xs font-medium text-[#355070]">
+                <label className="block text-sm font-medium text-[#0B2C4A]">
                   Address
                 </label>
                 <input
                   type="text"
-                  className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-[#0B2C4A] outline-none transition focus:border-[#1E80C9] focus:ring-2 focus:ring-[#1E80C9]/30"
+                  name="address"
+                  value={form.address}
+                  onChange={handleChange}
+                  required
+                  className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-[#1E80C9] focus:outline-none focus:ring-1 focus:ring-[#1E80C9]"
                   placeholder="Street, City, ZIP"
                 />
               </div>
 
+              {/* Service needed */}
               <div>
-                <label className="block text-xs font-medium text-[#355070]">
+                <label className="block text-sm font-medium text-[#0B2C4A]">
                   Service Needed
                 </label>
                 <input
                   type="text"
-                  className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-[#0B2C4A] outline-none transition focus:border-[#1E80C9] focus:ring-2 focus:ring-[#1E80C9]/30"
+                  name="service"
+                  value={form.service}
+                  onChange={handleChange}
+                  required
+                  className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-[#1E80C9] focus:outline-none focus:ring-1 focus:ring-[#1E80C9]"
                   placeholder="Driveway, house wash, patio, etc."
                 />
               </div>
 
-              <div className="grid gap-3 md:grid-cols-2">
+              {/* Date + Time */}
+              <div className="grid gap-4 md:grid-cols-2">
                 <div>
-                  <label className="block text-xs font-medium text-[#355070]">
+                  <label className="block text-sm font-medium text-[#0B2C4A]">
                     Preferred Date
                   </label>
                   <input
                     type="date"
-                    className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-[#0B2C4A] outline-none transition focus:border-[#1E80C9] focus:ring-2 focus:ring-[#1E80C9]/30"
+                    name="date"
+                    value={form.date}
+                    onChange={handleChange}
+                    className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-[#1E80C9] focus:outline-none focus:ring-1 focus:ring-[#1E80C9]"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-[#355070]">
+                  <label className="block text-sm font-medium text-[#0B2C4A]">
                     Best Time to Reach You
                   </label>
                   <input
                     type="text"
-                    className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-[#0B2C4A] outline-none transition focus:border-[#1E80C9] focus:ring-2 focus:ring-[#1E80C9]/30"
+                    name="time"
+                    value={form.time}
+                    onChange={handleChange}
+                    className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-[#1E80C9] focus:outline-none focus:ring-1 focus:ring-[#1E80C9]"
                     placeholder="Morning, afternoon, evening"
                   />
                 </div>
               </div>
 
+              {/* Details */}
               <div>
-                <label className="block text-xs font-medium text-[#355070]">
+                <label className="block text-sm font-medium text-[#0B2C4A]">
                   Additional Details
                 </label>
                 <textarea
-                  className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-[#0B2C4A] outline-none transition focus:border-[#1E80C9] focus:ring-2 focus:ring-[#1E80C9]/30"
-                  rows={3}
-                  placeholder="Tell us about the size of the area, stains, or anything we should know."
+                  name="details"
+                  value={form.details}
+                  onChange={handleChange}
+                  rows={4}
+                  className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-[#1E80C9] focus:outline-none focus:ring-1 focus:ring-[#1E80C9]"
+                  placeholder="Tell us about stains, size of the area, or anything else we should know."
                 />
               </div>
 
+              {/* Status message */}
+              {status !== "idle" && (
+                <p
+                  className={`text-sm ${
+                    status === "success"
+                      ? "text-emerald-600"
+                      : status === "error"
+                      ? "text-red-600"
+                      : "text-[#4A6484]"
+                  }`}
+                >
+                  {statusMessage}
+                </p>
+              )}
+
+              {/* Submit button */}
               <button
                 type="submit"
-                className="mt-2 w-full rounded-md bg-[#1E80C9] px-4 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-[#0E4A78] hover:-translate-y-0.5"
+                disabled={status === "loading"}
+                className="mt-2 w-full rounded-md bg-[#1E80C9] px-6 py-3 text-sm font-semibold text-white shadow hover:bg-[#4BB3FD] disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                Submit Request
+                {status === "loading" ? "Sending..." : "Submit Request"}
               </button>
-
-              <p className="mt-2 text-[11px] text-slate-500">
-                By submitting this form, you agree to be contacted about your
-                quote request. Your information is never shared or sold.
-              </p>
             </form>
           </section>
-        </div>
-
-        {/* Back to services / home link (optional small nav) */}
-        <div className="mt-10 text-xs text-[#355070]">
-          <span>Looking to learn more first? </span>
-          <Link
-            href="/services"
-            className="font-semibold text-[#1E80C9] underline-offset-2 hover:underline"
-          >
-            View our services
-          </Link>
-          <span> or </span>
-          <Link
-            href="/"
-            className="font-semibold text-[#1E80C9] underline-offset-2 hover:underline"
-          >
-            return to the homepage
-          </Link>
-          .
         </div>
       </div>
     </main>

@@ -1,6 +1,7 @@
 // app/page.tsx
 import Image from "next/image";
-import Link from "next/link"; // <-- 
+import Link from "next/link";
+
 export default function Home() {
   return (
     <main className="min-h-screen">
@@ -37,7 +38,7 @@ export default function Home() {
 
           <div className="mt-6 flex flex-wrap gap-3">
             <a
-              href="#contact"
+              href="/contact#booking"
               className="rounded-md bg-[#1E80C9] px-6 py-3 text-sm font-semibold text-white shadow-lg transition hover:-translate-y-0.5 hover:bg-[#4BB3FD]"
             >
               Get a Free Quote
@@ -215,7 +216,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* WHY CHOOSE US + BOOKING FORM */}
+      {/* WHY CHOOSE US + CTA (no form) */}
       <section
         id="contact"
         className="border-b border-slate-200 bg-white py-12 md:py-16"
@@ -267,61 +268,22 @@ export default function Home() {
             </ul>
           </div>
 
-          {/* Booking form */}
+          {/* CTA card linking to contact form */}
           <div className="rounded-xl border border-slate-200 bg-slate-50 p-6 shadow-sm">
             <h3 className="text-lg font-semibold text-[#0B2C4A]">
-              Book a Pressure Wash Today
+              Ready for a Free Quote?
             </h3>
             <p className="mt-1 text-xs text-[#4A6484]">
-              Fill out the form and we’ll follow up with pricing and
-              availability.
+              Tell us about your driveway, patio, or siding and we’ll send
+              pricing and availability through our quick booking form.
             </p>
 
-            <form className="mt-4 space-y-3">
-              <div>
-                <label className="block text-xs font-medium text-[#355070]">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-[#0B2C4A] outline-none transition focus:border-[#1E80C9] focus:ring-2 focus:ring-[#1E80C9]/30"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-medium text-[#355070]">
-                  Address
-                </label>
-                <input
-                  type="text"
-                  className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-[#0B2C4A] outline-none transition focus:border-[#1E80C9] focus:ring-2 focus:ring-[#1E80C9]/30"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-medium text-[#355070]">
-                  Service Needed
-                </label>
-                <input
-                  type="text"
-                  className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-[#0B2C4A] outline-none transition focus:border-[#1E80C9] focus:ring-2 focus:ring-[#1E80C9]/30"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-medium text-[#355070]">
-                  Preferred Date
-                </label>
-                <input
-                  type="date"
-                  className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm text-[#0B2C4A] outline-none transition focus:border-[#1E80C9] focus:ring-2 focus:ring-[#1E80C9]/30"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="mt-2 w-full rounded-md bg-[#1E80C9] px-4 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-[#0E4A78] hover:-translate-y-0.5"
-              >
-                Submit Request
-              </button>
-            </form>
+            <Link
+              href="/contact#booking"
+              className="mt-4 inline-flex w-full items-center justify-center rounded-md bg-[#1E80C9] px-4 py-2.5 text-sm font-semibold text-white shadow-md transition hover:bg-[#0E4A78] hover:-translate-y-0.5"
+            >
+              Go to Quote Form
+            </Link>
           </div>
         </div>
       </section>

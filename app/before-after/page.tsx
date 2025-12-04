@@ -21,8 +21,7 @@ const beforeAfterItems = [
     id: 3,
     src: "/Before%203.jpg",
     label: "Front Walkway",
-    description:
-      "Dull entry walkway refreshed for better curb appeal.",
+    description: "Dull entry walkway refreshed for better curb appeal.",
   },
 ];
 
@@ -140,6 +139,17 @@ export default function BeforeAfterPage() {
                 </p>
               </article>
             ))}
+          </div>
+
+          {/* VIEW MORE VIDEOS BUTTON */}
+          <div className="mt-8 flex justify-center">
+            <Link
+              href="https://www.youtube.com" // TODO: replace with your client's channel or playlist
+              target="_blank"
+              className="rounded-md bg-[#1E80C9] px-8 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-[#0E4A78] hover:-translate-y-0.5"
+            >
+              View More Videos
+            </Link>
           </div>
         </section>
 

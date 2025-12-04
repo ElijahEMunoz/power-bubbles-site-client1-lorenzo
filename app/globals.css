@@ -27,3 +27,23 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+/* Make input text visible */
+input, textarea, select {
+  color: #0B2C4A !important; /* Navy brand color */
+}
+
+/* Make placeholder text readable */
+input::placeholder,
+textarea::placeholder,
+select::placeholder {
+  color: #94A3B8 !important; /* Slate-400 */
+}
+
+/* Add clean focus style (optional but looks great) */
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: #4BB3FD;
+  box-shadow: 0 0 0 2px rgba(75, 179, 253, 0.3);
+}
