@@ -30,12 +30,26 @@ export async function POST(req: Request) {
       <p><strong>Best Time to Reach:</strong> ${time}</p>
       <p><strong>Additional Details:</strong><br>${details}</p>
     `;
+    //  Add this block Zapier logging line
+    const logLine = [
+      "BOOKING_LOG",
+      name,
+      email,
+      phone,
+      address,
+      service,
+      date,
+      time,
+      // avoid line breaks in details so it stays one line
+      (details || "").replace(/\r?\n/g, " "),
+    ].join("|");
 
     const data = await resend.emails.send({
       from: process.env.BOOKING_FROM_EMAIL!,
       to: process.env.BOOKING_TO_EMAIL!,
       subject: "New Pressure Wash Booking Request",
       html: emailHtml,
+      text: logLine, // include plain text log line for Zapier
     });
 
     return NextResponse.json({ success: true, data });

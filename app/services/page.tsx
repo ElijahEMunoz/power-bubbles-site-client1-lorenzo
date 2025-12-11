@@ -19,7 +19,9 @@ export default function ServicesPage() {
         <div className="grid gap-6 md:grid-cols-2 mb-12">
 
           {/* House Washing */}
-          <div className="bg-white rounded-xl shadow-sm px-6 py-5 flex gap-4 items-start">
+          <div className="bg-white rounded-xl shadow-sm px-6 py-5 flex gap-4 items-start 
+                          border border-slate-200 transition hover:-translate-y-1 
+                          hover:border-[#1E80C9]/40 hover:shadow-lg">
             <div className="w-14 h-14 rounded-lg bg-[#E4F2FF] flex items-center justify-center shadow-sm">
               <Image
                 src="/House Wash.png"
@@ -31,7 +33,7 @@ export default function ServicesPage() {
             </div>
             <div>
               <h2 className="font-semibold text-lg text-slate-900">
-                House Washing
+                Residential Washing
               </h2>
               <p className="text-sm text-slate-600 mt-1">
                 Soft washing for siding, stucco, and exterior surfaces to restore curb appeal.
@@ -40,7 +42,9 @@ export default function ServicesPage() {
           </div>
 
           {/* Driveway Cleaning */}
-          <div className="bg-white rounded-xl shadow-sm px-6 py-5 flex gap-4 items-start">
+          <div className="bg-white rounded-xl shadow-sm px-6 py-5 flex gap-4 items-start 
+                          border border-slate-200 transition hover:-translate-y-1 
+                          hover:border-[#1E80C9]/40 hover:shadow-lg">
             <div className="w-14 h-14 rounded-lg bg-[#E4F2FF] flex items-center justify-center shadow-sm">
               <Image
                 src="/DriveWay.png"
@@ -61,7 +65,9 @@ export default function ServicesPage() {
           </div>
 
           {/* Deck Cleaning */}
-          <div className="bg-white rounded-xl shadow-sm px-6 py-5 flex gap-4 items-start">
+          <div className="bg-white rounded-xl shadow-sm px-6 py-5 flex gap-4 items-start 
+                          border border-slate-200 transition hover:-translate-y-1 
+                          hover:border-[#1E80C9]/40 hover:shadow-lg">
             <div className="w-14 h-14 rounded-lg bg-[#E4F2FF] flex items-center justify-center shadow-sm">
               <Image
                 src="/Deck Cleaning.png"
@@ -81,12 +87,14 @@ export default function ServicesPage() {
             </div>
           </div>
 
-          {/* Concrete Cleaning */}
-          <div className="bg-white rounded-xl shadow-sm px-6 py-5 flex gap-4 items-start">
+          {/* Commercial Cleaning */}
+          <div className="bg-white rounded-xl shadow-sm px-6 py-5 flex gap-4 items-start
+                          border border-slate-200 transition hover:-translate-y-1 
+                          hover:border-[#1E80C9]/40 hover:shadow-lg">
             <div className="w-14 h-14 rounded-lg bg-[#E4F2FF] flex items-center justify-center shadow-sm">
               <Image
                 src="/Commerical.png"
-                alt="Concrete Cleaning icon"
+                alt="Commercial Cleaning icon"
                 width={50}
                 height={50}
                 className="object-contain"
@@ -94,7 +102,7 @@ export default function ServicesPage() {
             </div>
             <div>
               <h2 className="font-semibold text-lg text-slate-900">
-                Concrete Cleaning
+                Commercial Cleaning
               </h2>
               <p className="text-sm text-slate-600 mt-1">
                 Walkways, patios, pool decks, and storefront entrances cleaned and brightened.

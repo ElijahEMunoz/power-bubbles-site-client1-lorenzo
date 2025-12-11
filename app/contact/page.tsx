@@ -31,7 +31,9 @@ export default function ContactPage() {
   const [statusMessage, setStatusMessage] = useState("");
 
   function handleChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -249,18 +251,29 @@ export default function ContactPage() {
                     className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-[#1E80C9] focus:outline-none focus:ring-1 focus:ring-[#1E80C9]"
                   />
                 </div>
+
                 <div>
                   <label className="block text-sm font-medium text-[#0B2C4A]">
                     Best Time to Reach You
                   </label>
-                  <input
-                    type="text"
+                  <select
                     name="time"
                     value={form.time}
                     onChange={handleChange}
-                    className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm focus:border-[#1E80C9] focus:outline-none focus:ring-1 focus:ring-[#1E80C9]"
-                    placeholder="Morning, afternoon, evening"
-                  />
+                    className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm shadow-sm bg-white focus:border-[#1E80C9] focus:outline-none focus:ring-1 focus:ring-[#1E80C9]"
+                  >
+                    <option value="">Select a time window</option>
+                    <option value="Morning (8–11 AM)">Morning (8–11 AM)</option>
+                    <option value="Midday (11 AM–2 PM)">
+                      Midday (11 AM–2 PM)
+                    </option>
+                    <option value="Afternoon (2–5 PM)">
+                      Afternoon (2–5 PM)
+                    </option>
+                    <option value="Evening (5–7 PM)">
+                      Evening (5–7 PM)
+                    </option>
+                  </select>
                 </div>
               </div>
 

@@ -79,7 +79,7 @@ export default function Home() {
                 />
               </div>
               <h3 className="text-base font-semibold text-[#0B2C4A]">
-                House Washing
+                Residential Washing
               </h3>
               <p className="mt-2 text-xs text-[#4A6484]">
                 Gentle, low-pressure cleaning for siding, stucco, and exterior

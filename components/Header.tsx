@@ -8,12 +8,13 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-        {/* Logo + name */}
-        <div className="flex items-center gap-3">
+
+        {/* Logo + name (NOW CLICKABLE) */}
+        <Link href="/" className="flex items-center gap-3">
           {/* Logo image */}
           <div className="relative h-10 w-10 md:h-11 md:w-11">
             <Image
-              src="/Logo2.png" // <-- file in /public
+              src="/Logo2.png"
               alt="Power Bubbles logo"
               fill
               sizes="70px"
@@ -31,7 +32,7 @@ export default function Header() {
               Pressure Washing
             </div>
           </div>
-        </div>
+        </Link>
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-8 text-sm font-medium text-slate-700 md:flex">

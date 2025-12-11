@@ -174,7 +174,7 @@ export default function BeforeAfterPage() {
           {/* QR code image */}
           <div className="relative w-40 h-40 md:w-44 md:h-44 rounded-xl bg-white flex items-center justify-center shadow-md">
             <Image
-              src="/QR Code Sample.png" // put this file in your /public folder
+              src="/My_Gallery.png" // put this file in your /public folder
               alt="Scan to view more Power Bubbles results"
               fill
               className="object-contain p-4"
